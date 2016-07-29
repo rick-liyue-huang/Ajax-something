@@ -1,0 +1,97 @@
+<!-- compare the get and post type -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>POST method Ajax</title>
+	<style type="text/css">
+		p {
+			text-align: center;
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body>
+	<p>XMLHttpRequest</p>
+	<p id="result"></p>
+
+	<script type="text/javascript">
+		
+		var xhr = new XMLHttpRequest();
+
+		xhr.open('post', 'ajax02.php?');
+
+		// when in post type, must write request header: Content-Type, and only is "application/x-www-form-urlencoded"
+
+		// when in get type, may not write Content-Type
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+		// post data can be put in request body, or may not.
+		xhr.send('name=rick&age=10');
+
+		// listen response state
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log(xhr.responseText);
+			}
+		};
+
+		//  in get type
+
+		// var xhr = new XMLHttpRequest();
+
+		// xhr.open('get', 'ajax02.php?name=rick&age=10');
+
+		// xhr.setRequestHeader('Content-Type', 'text/html');
+
+		// xhr.send(null);
+
+		// xhr.onreadystatechange = function () {
+			
+		// 	if (xhr.readyState === 4 && xhr.status === 200) {
+		// 		console.log(xhr.responseText);
+		// 	}
+		// };
+
+
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

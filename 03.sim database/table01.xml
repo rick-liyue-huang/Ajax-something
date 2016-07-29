@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<item>
+		<name type="star">rick</name>
+		<album>change myself</album>
+		<age>39</age>
+		<sex>male</sex>		
+	</item>
+	<item>
+		<name type="star">leo</name>
+		<album>i am busy</album>
+		<age>39</age>
+		<sex>female</sex>		
+	</item>
+	<item>
+		<name type="star">rick</name>
+		<album>change myself</album>
+		<age>39</age>
+		<sex>male</sex>		
+	</item>
+	<item>
+		<name type="star">rick</name>
+		<album>change myself</album>
+		<age>39</age>
+		<sex>male</sex>		
+	</item>
+	<item>
+		<name type="star">adam</name>
+		<album>change myself</album>
+		<age>39</age>
+		<sex>male</sex>		
+	</item>
+	<item>
+		<name type="star">alex</name>
+		<album>change myself</album>
+		<age>39</age>
+		<sex>female</sex>		
+	</item>
+</root>

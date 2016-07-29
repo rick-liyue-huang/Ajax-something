@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		table {
+			width: 300px;
+			border-collapse: collapse;
+		}
+		td {
+			height: 40px;
+			text-align: center;
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<!-- used to put data from json of server database -->
+	</table>
+
+	<div class="btn"><input type="button" value="get data"></div>
+
+	<script type="text/javascript">
+		
+		var btn = document.querySelector('.btn');
+
+		var xhr = new XMLHttpRequest();
+
+		btn.onclick = function() {
+
+			xhr.open('get', 'table02.php');
+			xhr.send(null);
+
+			xhr.onreadystatechange = function() {
+
+				if (xhr.readyState === 4 && xhr.status === 200) {
+//   transfer to the object known by js
+					var data = JSON.parse(xhr.responseText);
+
+					console.log(data);
+
+					var html = '';
+
+					for (var i = 0; i < data.length; i++) {
+
+						html += '<tr>';
+						html += '<td>' + data[i].name + '</td>';
+						html += '<td>' + data[i].age + '</td>';
+						html += '<td>' + data[i].sex + '</td>';
+						html += '<td>' + data[i].album + '</td>';
+						html += '/tr>';
+					}
+
+					document.querySelector('table').innerHTML = html;
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

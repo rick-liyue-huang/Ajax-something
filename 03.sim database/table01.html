@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>XML</title>
+	<style>
+		table {
+			width: 300px;
+			border-collapse: collapse;
+		}
+		td {
+			height: 40px;
+			text-align: center;
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<!-- put the data from server database-->
+	</table>
+
+	<div class="btn"><input type="button" value="get data"></div>
+
+
+	<script>
+		var btn = document.querySelector('.btn');
+		var xhr = new XMLHttpRequest;
+
+		btn.onclick = function () {
+
+			xhr.open('post', 'table01.php');
+
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+			xhr.send();
+
+			xhr.onreadystatechange = function () {
+				if(xhr.readyState == 4 && xhr.status == 200) {
+					// ?responseXML
+					
+					console.log(xhr.responseXML);
+					// console.log(xhr.responseText);
+					// doucment
+					var doc = xhr.responseXML;
+
+					// get all items
+					var items = doc.getElementsByTagName('item');
+
+					var html = '';
+					// loop to get every item
+					for(var i=0; i<items.length; i++) {
+						var name = items[i].getElementsByTagName('name')[0].firstChild.nodeValue;
+						var album = items[i].getElementsByTagName('album')[0].firstChild.nodeValue;
+						var age = items[i].getElementsByTagName('age')[0].firstChild.nodeValue;
+						var sex = items[i].getElementsByTagName('sex')[0].firstChild.nodeValue;
+
+						// concate string html
+						html += '<tr>';
+
+						html += '<td>' + name + '</td>';
+						html += '<td>' + album + '</td>';
+						html += '<td>' + age + '</td>';
+						html += '<td>' + sex + '</td>';
+
+						html += '</tr>';
+
+						// put into dom 
+						document.querySelector('table').innerHTML = html;
+
+					}
+				}
+			}
+		}
+
+
+	</script>
+</body>
+</html>

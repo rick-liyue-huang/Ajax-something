@@ -1,0 +1,48 @@
+<!-- real time input sample -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		p {
+			text-align: center;
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body>
+	<p>XMLHttpRequest</p>
+	<p>
+		<input type="text" id="val">
+		<input type="button" value="confirm" id="btn">
+	</p>
+	<p id="result"></p>
+
+	<script type="text/javascript">
+		
+		var btn = document.getElementById('btn');
+		var xhr = new XMLHttpRequest();
+		var input = document.querySelector('input');
+
+		btn.onclick = function () {
+				
+				xhr.open('get', 'ajax04.php?content=' + input.value);
+
+				// xhr.setRequestHeader();
+
+				xhr.send(null);
+
+				xhr.onreadystatechange = function() {
+					
+					if (xhr.readyState === 4 && xhr.status === 200) {
+
+						document.querySelector('#result').innerHTML = xhr.responseText;
+					}
+				}
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!-- a sample how to communicate with PHP (server) -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		
+		form {
+			width: 500px;
+			margin: 100px auto;
+		}
+
+		label {
+			display: block;
+			margin: 10px 0
+		}
+
+	</style>
+</head>
+<body>
+
+<!-- action means the form submissioin address, method means the form submission type， get post -->
+<!-- get will show the form content in url -->
+<!-- post does not show it, and more secure -->
+
+	<form action="./login.php" method="post" enctype="multipart/form-data">
+		
+		<label for="">
+			user: <input type="text" name="username">
+		</label>
+
+		<label for="">
+			password: <input type="password" name="pass">
+		</label>
+
+		<label for="">
+			icon: <input type="file" name="upload">
+		</label>
+
+		<label for="">
+			<input type="submit" value="提交">
+		</label>
+
+	</form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

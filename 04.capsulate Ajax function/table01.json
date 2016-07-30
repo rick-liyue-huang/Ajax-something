@@ -1,0 +1,26 @@
+[
+	{
+		"name": "rick",
+		"photo": "./images/wlh.jpg",
+		"age": 39,
+		"sex": "male"
+	},
+	{
+		"name": "leo",
+		"album": "hello world",
+		"age": 35,
+		"sex": "male"
+	},
+	{
+		"name": "alex",
+		"album": "be busy",
+		"age": 32,
+		"sex": "female"
+	},
+	{
+		"name": "adam",
+		"album": "soda",
+		"age": 39,
+		"sex": "male"
+	}
+]

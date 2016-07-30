@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>realize the sample by my capsu function of Ajax</title>
+	<style type="text/css">
+		table {
+			width: 300px;
+			border-collapse: collapse;
+		}
+		td {
+			height: 40px;
+			text-align: center;
+			border: 1px solid #ccc;
+		}
+
+	</style>
+</head>
+<body>
+
+	<table>
+		<!-- used to store the data from database -->
+	</table>
+	<div class="btn"><input type="button" value="get data"></div>
+
+	<!-- import the Ajax tool function -->
+	<script type="text/javascript" src="./ajax.js"></script>
+	<script type="text/javascript">
+		
+		var btn = document.querySelector('.btn');
+
+		btn.onclick = function () {
+
+			// call ajax tool function
+			$.ajax({
+
+				url: 'table01.php',
+				type : 'post',
+				data: {'name':"rick", 'age': 10},
+				success: function(data) {
+					console.log(data);
+					var html = '';
+					for (var i = 0; i < data.length; i++) {
+						html += '<tr>';
+						html += '<td>' + data[i].name + '</td>';
+						html += '<td>' + data[i].sex + '</td>';
+						html += '<td>' + data[i].age + '</td>';
+						html += '<td>' + data[i].album + '</td>';
+						html += '</tr>';
+					}
+
+					document.querySelector('table').innerHTML = html;
+				},
+				error: function(err) {}
+			});
+		}
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

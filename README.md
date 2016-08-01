@@ -10,7 +10,7 @@
 
 #### Firstly, some basic knowledge about here, including PHP, and Ajax. Here we assume that the server database are exist and can be XML and json.
 
-#### Then I capsulate a tool function to sim the jQuery ajax method[](https://github.com/rick-liyue-huang/Ajax-something/tree/master/04.capsulate%20Ajax%20function), and compare it with the true jQuery ajax method as well.
+#### Then I [capsulate a tool function](https://github.com/rick-liyue-huang/Ajax-something/tree/master/04.capsulate%20Ajax%20function) to sim the jQuery ajax method, and compare it with the true jQuery ajax method as well.
 
 #### At last, two more contents are introduced, the Template[](https://github.com/rick-liyue-huang/Ajax-something/tree/master/07.ajax%20template) and Cross-domain[](https://github.com/rick-liyue-huang/Ajax-something/tree/master/08.cross%20domain). 
 

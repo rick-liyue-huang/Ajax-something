@@ -1,0 +1,101 @@
+<!-- I just rewrite the previous prog by template,
+so avoid concat the string -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSON</title>
+	<style>
+		table {
+			width: 700px;
+			border-collapse: collapse;
+		}
+		td {
+			height: 40px;
+			text-align: center;
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<table>
+	</table>
+	<div class="btn"><input type="button" value="getting data..."></div>
+	<script src="template-native.js"></script>
+	<script>
+
+		var btn = document.querySelector('.btn');
+
+
+			btn.onclick = function() {
+
+				var xhr = new XMLHttpRequest();
+
+				xhr.open('get', 'stars03.php');
+
+				xhr.send(null);
+
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4 && xhr.status === 200 ) {
+
+						var data = JSON.parse(xhr.responseText);
+
+						console.log(data);
+
+						var info = {
+							opt: data
+						};
+
+						// call template
+					    var html = template('tpl', info);
+					    console.log(html);
+
+					    document.querySelector('table').innerHTML = html;
+					}
+
+					
+				}
+			}
+			
+	</script>
+
+
+<!-- by php to get the template -->
+	<script type="text/template" id="tpl">
+		<% for(var i = 0; i < opt.length; i++)  { %>
+		<tr>
+			<td><%= opt[i].name %></td>
+			<td><%= opt[i].sex %></td>
+			<td><%= opt[i].age %></td>
+			<td><%= opt[i].album %></td>
+		</tr>
+	     <%	} %>
+
+	</script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

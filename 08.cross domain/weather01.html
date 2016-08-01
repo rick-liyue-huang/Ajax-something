@@ -1,0 +1,63 @@
+<!-- ajax contain the cross-domian tech(jsonp) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>weather broadcast</title>
+	<style>
+		table {
+			width: 600px;
+			border-collapse: collapse;
+		}
+		td {
+			height: 40px;
+			text-align: center;
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		
+	</table>
+	<script src="query.min.js"></script>
+	<script src="template-native.js"></script>
+	<script>
+		// jQuery ajax can realize the cross-domain
+		$.ajax({
+			url: 'http://api.map.baidu.com/telematics/v3/weather',
+			type: 'get',
+			// setting cross-domain
+			dataType: 'jsonp',
+			data: {location: '哈尔滨', output: 'json', ak: '0A5bc3c4fb543c8f9bc54b77bc155724'},
+			success: function (info) {
+				console.log(info);
+
+				// import template
+				var html = template('tpl', info.results[0]);
+
+				console.log(html);
+
+				$('table').append(html);
+			}
+		});
+	</script>
+	<script type="text/template" id="tpl">
+		<% for(var i=0; i<weather_data.length; i++) { %>
+			<tr>
+				<td><%= weather_data[i].date %></td>
+				<td><%= weather_data[i].temperature %></td>
+				<td><%= weather_data[i].weather %></td>
+				<td><%= weather_data[i].wind %></td>
+				<td>
+					<img src="<%= weather_data[i].dayPictureUrl %>" alt="">
+				</td>
+				<td>
+					<img src="<%= weather_data[i].nightPictureUrl %>" alt="">
+				</td>
+			</tr>
+		<% } %>
+	</script>
+</body>
+</html>

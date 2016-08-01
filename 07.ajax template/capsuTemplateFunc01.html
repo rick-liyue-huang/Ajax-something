@@ -1,0 +1,65 @@
+<!-- template is a useful tool used to add content in the html realtime.
+here I capsulate a function to realize the template. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Capsulate JS Template</title>
+</head>
+<body>
+	<div class="result"></div>
+	<script type="text/javascript">
+		// alert(1);
+	</script>
+
+	<!-- import the template -->
+	<!-- <script src="./js/template-native.js"></script> -->
+
+	<!-- template -->
+	<script type="text/itcast" id="tpl">  
+		<h4><%=name%></h4>
+		<h5><%=age%></h5>
+	</script>
+
+	<script>
+		// 1、need a string
+		// 2、need a data object
+		// 3、the data need match with the template
+
+		// 数据
+		var data = {
+			name: 'itcast',
+			age: 10
+		}
+
+		// encapsulate a function to sim the template
+		function template(id, data) {
+			// tpl is a element id
+			var tpl = document.getElementById(id);
+
+			// string
+			tpl = tpl.innerHTML;
+
+			// use to replace the special content
+			var reg = /<%=\s*([^%>]+\S)\s*%>/;
+			var match;
+
+			// untill to cannot match anything
+			while(match = reg.exec(tpl)) {
+				// replace
+				tpl = tpl.replace(match[0], data[match[1]]);
+			}
+
+			return tpl;
+		}
+
+		var html = template('tpl', data);
+
+		console.log(html);
+
+		document.querySelector('.result').innerHTML = html;
+
+	</script>
+</body>
+</html>

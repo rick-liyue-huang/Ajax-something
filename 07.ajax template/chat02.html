@@ -1,0 +1,176 @@
+<!-- here I use two js extensions, one is jQuery and the other is js-template 
+the js-template is a more complicated one than what I encapsulated. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #F7F7F7;
+		}
+
+		h3 {
+			text-align: center;
+		}
+
+		.chatbox {
+			width: 500px;
+			height: 500px;
+			margin: 0 auto;
+			border: 1px solid #CCC;
+			background-color: #FFF;
+			border-radius: 5px;
+		}
+
+		.messages {
+			height: 350px;
+			padding: 20px 40px;
+			box-sizing: border-box;
+			border-bottom: 1px solid #CCC;
+			overflow: scroll;
+		}
+
+		.messages h5 {
+			font-size: 20px;
+			margin: 10px 0;
+		}
+
+		.messages p {
+			font-size: 18px;
+			margin: 0;
+		}
+
+		.self {
+			text-align: right;
+		}
+
+		.other {
+			text-align: left;
+		}
+
+		.form {
+			height: 150px;
+		}
+
+		.form .input {
+			height: 110px;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+
+		.form .btn {
+			height: 40px;
+			box-sizing: border-box;
+			border-top: 1px solid #CCC;
+		}
+
+		.form textarea {
+			display: block;
+			width: 100%;
+			height: 100%;
+			box-sizing: border-box;
+			border: none;
+			resize: none;
+			outline: none;
+			font-size: 20px;
+		}
+
+		.form input {
+			display: block;
+			width: 100px;
+			height: 30px;
+			margin-top: 5px;
+			margin-right: 20px;
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<h3>simple ajax Template sample</h3>
+	<div class="chatbox">
+		<div class="messages">
+
+		</div>
+		<div class="form">
+			<div class="input">
+				<textarea></textarea>
+			</div>
+			<div class="btn">
+				<input type="button" value="send">
+			</div>
+		</div>
+	</div>
+	<script src="jquery.min.js"></script>
+	<script src="template-native.js"></script>
+	<script>
+		$('.btn').on('click', function () {
+
+			// what i said
+			var data = {
+				flag: 'self',
+				name: 'i say:',
+				text: $('textarea').val()
+			}
+
+			var html = template('tpl', data);
+
+			console.log(html);
+
+			$('.messages').append(html);
+
+			$.ajax({
+
+				type: 'post',
+				url: 'chat02.php',
+				data: {},
+				success: function(data) {
+
+					// the other said
+					data = {
+						flag: 'other',
+						name: 'the other say:',
+						text: data
+					}
+
+					var html = template('tpl', data);
+
+					$('.messages').append(html);
+				}
+			});
+
+			$('textarea').val('');
+		});
+	</script>
+	
+	<!-- template -->
+	<!-- the names(keys) in template are matched with that of data-->
+	<script type="text/template" id="tpl">
+		<div class="<%= flag %>">
+			<h5><%= name %></h5>
+			<p><%= text %></p>
+		</div>
+	</script>
+
+
+	<?php echo $str; ?>
+	<%= str %>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

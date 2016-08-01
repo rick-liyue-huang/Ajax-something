@@ -1,0 +1,89 @@
+<!-- the region level includes the template and jQuery -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>region sample</title>
+</head>
+<body>
+	<select name="province" id="province"></select>
+	<select name="city" id="city"></select>
+	<select name="district" id="district"></select>
+
+	<script src="jquery.min.js"></script>
+	<script src="template-native.js"></script>
+	<script>
+		// get all resuslts on each region
+		// 1、the parent element ID
+		// 2、the current level(province, city or district)
+		// 3、create the element (select)
+
+		// 1、will get p of province level, c of city level, and d of district level.
+		// 2、c + p the id
+		// 3、d + c the id
+		// 4、p + 000000
+
+		// get the province level
+		$.ajax({
+			url: 'region.php',
+			type: 'get',
+			data: {type: 'p', pid: '000000'},
+			success: function (data) {
+				console.log(data);
+
+				var html = template('tpl', {opts: data});
+
+				// console.log(html)
+				
+				$('#province').append(html);
+			}
+		});
+
+		// the p onchange to get the city level.
+		$('#province').on('change', function () {
+			var _this = $(this);
+
+			// clear all level of children
+			_this.nextAll().empty();
+
+			$.ajax({
+				url: 'region02.php',
+				type: 'get',
+				data: {type: 'c', pid: _this.val()},
+				success: function (data) {
+
+					var html = template('tpl', {opts: data});
+
+					$('#city').empty().append(html);
+
+				}
+			});
+		});
+
+		$('#city').on('change', function () {
+			var _this = $(this);
+
+			// clear all children level
+			_this.nextAll().empty();
+
+			$.ajax({
+				url: 'region.php',
+				type: 'get',
+				data: {type: 'd', pid: _this.val()},
+				success: function (data) {
+					var html = template('tpl', {opts: data});
+					$('#district').empty().append(html);
+				}
+			});
+		});
+	</script>
+	<script type="text/template" id="tpl">
+		<% for(var k in opts) { %>
+			<option value="<%= k %>">
+				<%= opts[k] %>
+			</option>
+		<% } %>
+	</script>
+</body>
+</html>

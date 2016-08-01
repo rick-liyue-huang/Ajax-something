@@ -1,3 +1,3 @@
 <?php 
-	echo 'hello: ' . $_GET['content'];
+	echo 'hello: ' . $_GET['content2'];
 ?>

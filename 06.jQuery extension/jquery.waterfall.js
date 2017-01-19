@@ -61,6 +61,7 @@
 					//  setting other row
 
 					// we need get the lest value of height
+					
 					var min_h = h[0];
 					var min_k = 0;
 					for (var i = 0; i < h.length; i++) {

@@ -81,6 +81,7 @@
 				}
 
 			});
+		
 
 			// setting the max height column
 			var max_h = h[0];

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="">
+		<label for="">
+			姓名: <input type="text" name="name">
+		</label>
+
+		<label for="">
+			年龄: <input type="text" name="age">
+		</label>
+		<label for="">
+			<input type="button" value="保存">
+		</label>
+	</form>
+	<script>
+		var btn = document.querySelector('[type=button]');
+
+		// 原生JS里有没有一个方法和jQuery中serialize()
+		// key=val&key1=val1
+
+		var formData = new FormData;
+
+		var obj = {
+			key: 'val',
+			name: 'rick',
+			age: 10
+		};
+
+		// formData.append('key', 'val');
+		// formData.append('name', 'itcast');
+		// formData.append('age', 10);
+
+		for(var key in obj) {
+			formData.append(key, obj[key]);
+		}
+
+		// console.log(formData);
+
+		var xhr = new XMLHttpRequest;
+
+		xhr.open('post', '03.php');
+
+		// 
+		xhr.send(formData);
+
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				console.log(xhr.responseText);
+			}
+		}
+
+		// 总结一下
+		// FormData 实际上是帮我们管理要传递的数据
+		// 没有FormData，可以自已拼凑数据
+
+	</script>
+</body>
+</html>

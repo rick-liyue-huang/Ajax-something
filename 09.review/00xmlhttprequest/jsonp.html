@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		// 本质返回客户端事先定义好的一个函数
+		// 然后服务器端将服务器从数据库取得的数据以事先定义好的
+		// 这个函数的参数传递过来
+		function sayHello(json) {
+			console.log(json);
+		}
+	</script>
+	<!-- 服务端通过接收callback这个Key就可以接收到事先定义好的函数 -->
+	<script type="text/javascript" src="jsonp.php?callback=sayHello"></script>
+	<!-- 当跨域形式也是可以的，如下 -->
+	<script type="text/javascript" src="http://www.taobao.com/jsonp.php?callback=sayHello"></script>
+</head>
+<body>
+	<script>
+		
+		// alert(red);
+	</script>
+</body>
+</html>

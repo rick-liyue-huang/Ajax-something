@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery Plugin</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #F7F7F7;
+			font-family: '微软雅黑';
+		}
+
+		.wrapper {
+			padding: 50px;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: 300px;
+		}
+
+		.items {
+			position: relative;
+		}
+
+		.item {
+			width: 228px;
+			position: absolute;
+		}
+
+		.tips {
+			width: 280px;
+			height: 40px;
+			margin: 30px auto 0;
+			text-align: center;
+			line-height: 40px;
+			background-color: #CCC;
+			border-radius: 6px;
+			font-size: 24px;
+			cursor: pointer;
+		}
+
+		.tips.loading {
+			background-color: transparent;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="items">
+
+		</div>
+		<p class="tips loading">正在加载...</p>
+	</div>
+	<!-- 引入库 -->
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/template-native.js"></script>
+	<script src="./js/jquery.waterFall.js"></script>
+	<script>
+		// 可能已经跟服务端做过沟通
+		// 请求地址需要被告知
+		// 请求的方式需要被告知
+		// 请求参数也需要被告知
+		// 响应的结果“格式”需要被告知
+		function getData(page) {
+			$.ajax({
+				type: 'post',
+				url: 'data.php',
+				data: {page: page},
+				beforeSend: function () {
+
+					$('p.tips').text('正在加载...')
+					.addClass('loading');
+				},
+				success: function (data) {
+					console.log(data);
+
+					// 没有更多数据了
+					if(data.page < 0) {
+						$('p.tips').remove();
+						return;
+					}
+
+					// 利用模板引擎将数据替换
+					var html = template('tpl', data);
+
+					// console.log(html);
+
+					// 添加元素
+					$('.items').append(html);
+					// 瀑布流布局
+					$('.items').waterFall();
+
+					// 还原状态
+					$('p.tips').text('点此加载更多')
+					.removeClass('loading')
+					.attr('data-page', data.page);
+				}
+			});
+		}
+
+		// 首次加载
+		getData(1);
+
+		// 获取更多数据
+		$('p.tips').on('click', function () {
+
+			if($(this).hasClass('loading')) {
+				return false;
+			}
+
+			// 获取页码
+			var page = $(this).attr('data-page');
+			// 获取对应页码的数据
+			getData(page);
+		});
+	</script>
+	<script type="text/template" id="tpl">
+		<% for(var i=0; i<items.length; i++) { %>
+		<div class="item">
+			<img src="<%= items[i].path %>" alt="">
+			<p><%= items[i].text %></p>
+		</div>
+		<% } %>
+	</script>
+</body>
+</html>

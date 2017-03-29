@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		table, td {
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		
+	</table>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/template-native.js"></script>
+	<script>
+		// ajax方法，可以发起异步请求XMLHttpRequest
+		// 还可以发起JSONP的跨域请求
+		$.ajax({
+			type: 'get',
+			url: 'http://api.map.baidu.com/telematics/v3/weather',
+			data: {ak: '0A5bc3c4fb543c8f9bc54b77bc155724', location: '北京', output: 'json'},
+			dataType: 'jsonp', // 设置成jsonp就可发起JSONP的请求了
+			success: function (data) {
+				console.log(data);
+
+				// 调用模板引擎
+				var html = template('tpl', data['results'][0]);
+
+				console.log(html);
+
+				$('table').html(html);
+			}
+		});
+	</script>
+	<script type="text/template" id="tpl">
+		<% for(var i=0; i<weather_data.length; i++) { %>
+		<tr>
+			<td><%= weather_data[i].date %></td>
+			<td><img src="<%= weather_data[i].dayPictureUrl %>" alt=""></td>
+			<td><img src="<%= weather_data[i].nightPictureUrl %>" alt=""></td>
+			<td><%= weather_data[i].temperature %></td>
+			<td><%= weather_data[i].weather %></td>
+			<td><%= weather_data[i].wind %></td>
+		</tr>
+		<% } %>
+	</script>
+</body>
+</html>

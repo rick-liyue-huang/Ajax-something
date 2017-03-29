@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		
+		var xhr = new XMLHttpRequest;
+
+		xhr.open('get', '02.php');
+
+		xhr.send(null);
+
+		// XMLHttpRequest 2.0
+		xhr.timeout = 5000;
+
+		// 这个事件监听是否超时，当超时就会调用
+		xhr.ontimeout = function () {
+			// 
+			alert('超时了， 可以取消loading状态了');
+		}
+
+		xhr.onreadystatechange = function () {
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				console.log(xhr.responseText);
+			}
+		}
+	</script>
+</body>
+</html>

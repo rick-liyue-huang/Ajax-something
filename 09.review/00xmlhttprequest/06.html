@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="">
+		<label for="">
+			头像: <input type="file">
+		</label>
+		<label for="">
+			<input type="button" value="保存">
+		</label>
+	</form>
+	<img src="" class="preview" alt="">
+	<script>
+		var btn = document.querySelector('[type=button]');
+
+		btn.onclick = function () {
+			// 获取文件上传表单
+			var file = document.querySelector('input[type=file]');
+
+			// 利用FormData实现
+			var formData = new FormData();
+
+			// 追加数据
+			formData.append('picture', file.files[0]);
+
+			var xhr = new XMLHttpRequest;
+
+			// 监听进度
+			xhr.upload.onprogress = function (ev) {
+				// console.log(11);
+				// console.log(ev);
+
+				console.log((ev.loaded / ev.total) * 100 + '%');
+			};
+
+			xhr.open('post', '05.php');
+
+			// 
+			xhr.send(formData);
+
+			xhr.onreadystatechange = function () {
+				if(xhr.readyState == 4 && xhr.status == 200) {
+					console.log(xhr.responseText);
+				}
+			}
+		}
+
+	</script>
+</body>
+</html>

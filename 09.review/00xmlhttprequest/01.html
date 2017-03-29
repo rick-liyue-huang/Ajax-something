@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+    <script>
+        // XMLHttpRequest这个对象可以异步的方式发起请求
+
+        // 实例化
+        var xhr = new XMLHttpRequest;
+
+        // 发起一个请求 
+        // get方式传参，需要将参数放到url后面格式?key=val&key1=val1
+        // post方式传参，需要将参数放到xhr.send()格式key=val&key1=val1
+        // xhr.open('get', '01.php?name=itcast&age=10');
+        xhr.open('post', '01.php');
+
+        // 可能根据需要发送一些参数
+
+        // 需要指定一个Content-Type
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // 发送
+        xhr.send('name=itcat&age=10');
+
+        // 监听状态，等待处理
+        xhr.onreadystatechange = function () {
+            // 
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText);
+                document.querySelector('p').innerHTML = xhr.responseText;
+            }
+        }
+
+        // var str = 'hello world';
+
+        // var json = {
+        //     name: 'itcast',
+        //     age: 10
+        // }
+
+    </script>
+</body>
+</html>

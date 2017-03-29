@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSON</title>
+	<style>
+		table {
+			width: 700px;
+			border-collapse: collapse;
+		}
+		td {
+			height: 40px;
+			text-align: center;
+			border: 1px solid #CCC;
+		}
+	</style>
+</head>
+<body>
+	<table>
+
+	</table>
+	<div class="btn"><input type="button" value="获取数据"></div>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/template-native.js"></script>
+	<!-- 引入模板引擎后，就有一个全局方法template(tpl, data) -->
+	<script>
+		$('.btn').on('click', function () {
+
+			$.ajax({
+				type: 'get',
+				url: 'stars.php',
+				success: function (data) {
+					console.log(data);
+
+					// for(var i=0; i<data.length; i++) {
+
+					// }
+					// 拼凑数据
+					var info = {
+						items: data
+					}
+
+					// 利用模板引擎实现
+					var html = template('tpl', info);
+
+					// console.log(html);
+
+					$('table').html(html);
+				}
+			});
+		});
+	</script>
+	<!-- type 告之浏览器该如何处理 -->
+	<script type="text/template" id="tpl">
+		<% for(var i=0; i<items.length; i++) { %>
+		<tr>
+			<td><%= items[i].name %></td>
+			<td><%= items[i].sex %></td>
+			<td><%= items[i].age %></td>
+			<td><%= items[i].ablum %></td>
+		</tr>
+		<% } %>
+	</script>
+</body>
+</html>

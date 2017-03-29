@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Global Ajax Event Handlers</title>
+	<style>
+		h5 {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<!-- 引入 -->
+	<script src="./js/jquery.min.js"></script>
+	<script>
+		// 确实调用了ajax
+		// 封装的作用，使用更简洁
+		$.ajax({
+			type: 'post',
+			url: '01.php',
+			data: {},
+			// 超时设置
+			timeout: 1000,
+			// 来约束服务端返回数据的格式
+			dataType: 'json',
+			// 请求之前调用
+			beforeSend: function () {
+				console.log(2);
+
+				// if(!false) return false;
+			},
+			success: function (data) {
+				console.log(data);
+			},
+			error: function (err, textStatus, errorThrown) {
+				// 
+				console.log(111);
+				console.log(textStatus);
+				console.log(errorThrown);
+
+				if(textStatus == 'timeout') {
+					alert('超时了');
+				}
+			},
+			complete: function () {
+				console.log('取消loading');
+			}
+		});
+
+		// $.get();
+
+		// $.ajax({
+		// 	type: 'get'
+		// });
+
+		// $.post();
+		
+		// $.ajax({
+		// 	type: 'post'
+		// })
+	</script>
+</body>
+</html>

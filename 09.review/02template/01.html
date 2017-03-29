@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="result"></div>
+	<script>
+		// 
+		var str = '<h3><% name %></h3>';
+		var data = {
+			name: 'rick'
+		};
+
+		// 替换 位置
+		// replace()
+		// 正则表达式找到位置
+
+		// 模板引擎的工作原理，实际上利正则表达式，去匹配我们事先
+		// 定义好的一些标记，然后将这些标记进行替换
+
+		var reg = /<%\s*([^%>]+\S)\s*%>/;
+
+		var match = reg.exec(str);
+
+		console.log(match);
+
+		var str1 = match[0]; // <% name %>
+		var str2 = match[1]; // name
+
+		str = str.replace(str1, data[str2]);
+
+		console.log(str);
+
+		document.querySelector('.result').innerHTML = str;
+
+
+	</script>
+</body>
+</html>

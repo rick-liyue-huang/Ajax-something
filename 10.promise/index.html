@@ -7,32 +7,52 @@
   <title>Document</title>
 </head>
 <body>
-  <script src="./myPromise.js"></script>
+  <script src="./myPromise2.js"></script>
   <script>
+    let pop = new MyPromise(function(res, rej) {
+      // res('aaa');
+      // rej('bbb');
+    });
+    pop.then(function() {
+      console.log9
+    });
+    pop.catch(function() {
+      console.log()
+    })
     let promise = new MyPromise(function(resolve, reject) {
       // resolve(111);
       // reject(222);
       setTimeout(() => {
-        resolve(111);
-        // reject(222);
+        // resolve(111);
+        reject(222);
       }, 2000);
     });
-    promise.then(function(data) {
+    // let promise = new Promise(function(res, rej) {
+    //   res(111);
+    // })
+    let pp = promise.then(function(data) {
       // console.log('fullfilled');
       console.log(data);
+      // return '111';
+      // return ddpop;
     }, function(data) {
       // console.log('rejected');
       console.log(data);
-    })
+      // return '333';
+      // return popdd;
+    });
 
-    promise.then(function(data) {
+    pp.then(function(data) {
       // console.log('fullfilled');
       console.log(data);
     }, function(data) {
       // console.log('rejected');
       console.log(data);
-    })
-    console.log(promise);
+    });
+    // console.log(p === promise);
+
+
+    // console.log(promise);
   </script>
 </body>
 </html>

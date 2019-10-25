@@ -49,6 +49,7 @@
    }
   //  export 'then' method, can trigger the different callback by status,  
   then(onResovled, onRejected) {
+
     // confirm has 'onResolved' callback
     if(this._isFunction(onResovled)) {
       // confirm the current status is fullfilled

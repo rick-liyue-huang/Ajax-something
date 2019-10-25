@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./myPromise.js"></script>
+  <script>
+    let promise = new MyPromise(function(resolve, reject) {
+      // resolve(111);
+      // reject(222);
+      setTimeout(() => {
+        resolve(111);
+        // reject(222);
+      }, 2000);
+    });
+    promise.then(function(data) {
+      // console.log('fullfilled');
+      console.log(data);
+    }, function(data) {
+      // console.log('rejected');
+      console.log(data);
+    })
+
+    promise.then(function(data) {
+      // console.log('fullfilled');
+      console.log(data);
+    }, function(data) {
+      // console.log('rejected');
+      console.log(data);
+    })
+    console.log(promise);
+  </script>
+</body>
+</html>
